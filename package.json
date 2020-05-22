@@ -1,0 +1,25 @@
+{
+  "name": "github-sync",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "sync": "./index.js",
+    "publish": "./dir-publish.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zhangguanghui",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "chalk": "^2.4.2",
+    "co": "^4.6.0",
+    "cross-spawn": "^6.0.5",
+    "fs-extra": "^7.0.1",
+    "inquirer": "^6.2.2",
+    "opn": "^6.0.0",
+    "qs": "^6.7.0"
+  }
+}
