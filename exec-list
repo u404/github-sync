@@ -1,0 +1,49 @@
+#! /usr/bin/env node
+
+const os = require("os")
+const path = require("path")
+const fs = require("fs-extra")
+
+const spawn = require("cross-spawn")
+const chalk = require("chalk")
+
+
+const error = (msg) => {
+  console.log(chalk.red(msg || "发生错误"))
+  process.exit(0)
+}
+
+
+const exec = () => {
+  let jsonPath = process.argv[2]
+  
+  if(!jsonPath) {
+    error("请指定list JSON文件路径")
+  }
+  if(!path.isAbsolute(jsonPath)) { // 对于非绝对路径的参数，那么以桌面为基准生成绝对路径
+    jsonPath = path.resolve(os.homedir(), "Desktop", jsonPath)
+  }
+
+  let jsonList = []
+  try {
+    jsonList = require(jsonPath)  // 尝试读取文件
+  } catch (e) {
+    error("读取JSON文件失败")
+  }
+
+  console.log(jsonList)
+
+  jsonList.forEach((commandStr) => {
+    const args = commandStr.split(/\s+/)
+    const command = args.shift()
+    console.log(chalk.yellow(`------- Command Start：${chalk.blue(commandStr)} -------`))
+    spawn.sync(command, args, {
+      cwd: process.cwd(),
+      stdio: 'inherit'
+    })
+    console.log(chalk.yellow(`------- Command End：${chalk.blue(commandStr)} -------`))
+  })
+}
+
+
+exec()
