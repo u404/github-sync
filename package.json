@@ -5,7 +5,8 @@
   "main": "index.js",
   "bin": {
     "sync": "./index.js",
-    "publish": "./dir-publish.js"
+    "publish": "./dir-publish.js",
+    "execlist": "./exec-list.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
